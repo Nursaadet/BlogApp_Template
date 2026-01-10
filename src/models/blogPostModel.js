@@ -28,7 +28,7 @@ const blogPostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-
+    imageUrl: String,
     content: {
       type: String,
       trim: true,
@@ -36,7 +36,7 @@ const blogPostSchema = new mongoose.Schema(
     },
     imageUrl: String,
 
-    published: {
+    isPublished: {
       type: Boolean,
       default: true,
     },
