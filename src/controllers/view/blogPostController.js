@@ -27,7 +27,16 @@ module.exports = {
       .sort({ createdAt: "desc" })
       .limit(3);
 
-    res.render("index", { data, categories, posts: data, recentPosts });
+     const details = await res.getModelListDetails(BlogPost, {
+      isPublished: true,
+    });
+    res.render("index", {
+      data,
+      categories,
+      posts: data,
+      recentPosts,
+      details,
+    });
   },
 
   create: async (req, res) => {
