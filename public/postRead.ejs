@@ -1,4 +1,4 @@
-V{%- include('includes/header') %}
+{%- include('components/header') %}
 </div>
 <!-- main start -->
 <main class="container">
@@ -7,7 +7,8 @@ V{%- include('includes/header') %}
             <!-- BlogPost Read -->
             <div class="admin-area text-end">
                 <a class="btn btn-sm btn-primary" href="/post/:id/update">Update</a>
-                <a class="btn btn-sm btn-danger" href="/post/:id/delete" onclick="return confirm('Are you sure?')">Delete</a>
+                <a class="btn btn-sm btn-danger" href="/post/:id/delete"
+                    onclick="return confirm('Are you sure?')">Delete</a>
                 Published: true
             </div>
             <article class="blog-post">
@@ -40,4 +41,4 @@ V{%- include('includes/header') %}
 </main>
 <!-- main end -->
 
-{%- include('includes/footer') %}
+{%- include('components/footer') %}
