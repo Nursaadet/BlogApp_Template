@@ -1,5 +1,41 @@
 <nav class="blog-pagination" aria-label="Pagination">
-    <a class="btn btn-outline-primary rounded-pill" href="#">1</a>
-    <a class="btn btn-outline-secondary rounded-pill">2</a>
+  {% if(details.pages) { %}
+
+  <a
+    class="btn btn-outline-primary rounded-pill {%= details.pages.previous? '' : 'disabled' %}"
+    href="?page=1"
+    >&laquo;</a
+  >
+  <a
+    class="btn btn-outline-primary rounded-pill {%= details.pages.previous? '' : 'disabled' %}"
+    href="?page={%= details.pages.previous %}   "
+    >Prev</a
+  >
+  {% if(details.pages.current > 3) { %}
+  <span>...</span>
+  {% } %}
+  <!-- [1,2,3] -->
+  {% for( index in details.pages.list) { %}
+  <a
+    class="btn rounded-pill {%= details.pages.list[index] == details.pages.current ? 'btn-primary':'btn-outline-secondary' %}"
+    href="?page={%= details.pages.list[index] %}"
+  >
+    {%= details.pages.list[index] %}
+  </a>
+  {% } %} {% if(details.pages.current < details.pages.total-3) { %}
+  <span>...</span>
+  {% } %}
+  <a
+    class="btn btn-outline-primary rounded-pill {%= details.pages.next? '' : 'disabled' %}"
+    href="?page={%= details.pages.next %}   "
+    >Next</a
+  >
+  <a
+    class="btn btn-outline-primary rounded-pill {%= details.pages.next? '' : 'disabled' %}"
+    href="?page={%= details.pages.total %}"
+    >&raquo;</a
+  >
+
+  {% } %}
 </nav>
-<p class="text-end p-2 border-top">Total 5 Posts</p>
+<p class="text-end p-2 border-top">{%= details.totalRecords %}</p>
