@@ -1,5 +1,5 @@
 module.exports = function removeQueryParam(queryString, paramName) {
-  const searchParams = new URLSearchParams(queryString);
+  const searchParams = new URLSearchParams(queryString);  //new URL()
   searchParams.delete(paramName);
 
   return Array.from(searchParams.entries())

@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     EXPRESSJS - EJS-BLOG Project with Mongoose
 ------------------------------------------------------- */
-
+require("express-async-errors");
 const express = require("express");
 const app = express();
 
@@ -10,13 +10,27 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 const session = require("cookie-session");
+const { closeDelimiter } = require("ejs");
 app.use(
-  session({ secret: process.env.SECRET_KEY || "secret_keys_for_cookies" })
+  session({ secret: process.env.SECRET_KEY || "secret_keys_for_cookies" }),
 );
 /* ------------------------------------------------------- */
 // Accept json data & convert to object:
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+//<% %>
+// require("ejs")
+// ejs.delimiter="#"
+// ejs.openDelimiter="{"
+// ejs.closeDelimiter="}"
+app.set("view engine", "ejs");
+app.set("view options", {
+  // delimiter: "%",
+  openDelimiter: "{", //{{ }} , << >>
+  closeDelimiter: "}",
+});
+
+app.set("views", "./public");
 
 // Connect to MongoDB with Mongoose:
 require("./src/dbConnection");
@@ -26,6 +40,10 @@ app.use(require("./src/middlewares/queryHandler"));
 
 // StaticFiles:
 app.use("/assets", express.static("./public/assets"));
+app.use((req, res, next) => {
+  res.locals.user = req.session?.user;
+  next();
+});
 
 // HomePage:
 app.all("/", (req, res) => {

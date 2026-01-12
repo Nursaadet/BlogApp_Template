@@ -23,15 +23,12 @@ const User = require("../../controllers/view/userController");
 
 // Login and logout routes
 // Handle login (POST for form submission)
-router.route("/login").post(User.login).get(User.login);
-// Handle logout (POST since it involves action)
-router.post("/logout", User.logout);
 
 // User management routes
 // Get the list of users
 router.get("/", User.list);
 // Create a new user
-router.route("/register").post(User.register).get(User.register);
+
 // Get a specific user by ID
 router.get("/:id", User.read);
 // Update a specific user by ID

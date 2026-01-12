@@ -66,7 +66,7 @@ module.exports = {
 
   login: async (req, res) => {
     const { email, password } = req.body;
-
+    res.render("loginForm");
     if (email && password) {
       // const user = await User.findOne({ email: email, password: passwordEncrypt(password) })
       // No need passwordEncrypt, because using "set" in model:

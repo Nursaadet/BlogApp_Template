@@ -3,7 +3,8 @@
     <nav class="nav nav-underline justify-content-between">
         {% if(categories?.length>0) { %}
         {% categories.forEach((category)=>{ %}
-        <a class="nav-item nav-link link-body-emphasis" href="#">{%= category.name %}</a>
+         <a class="nav-item nav-link link-body-emphasis" href="/blog/post?filter[blogCategoryId]={%= category.id %}">{%=
+            category.name %}</a>
         {% }) %}
         {% } else { %}
         <p>No category found</p>

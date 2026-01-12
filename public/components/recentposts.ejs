@@ -8,7 +8,7 @@
                 {% recentPosts.forEach((post)=>{ %}
                 <li>
                     <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                        href="/blog/post/:id">
+                        href="/blog/post/{%= post.id %}">
                         <div class="col-lg-8">
                             <h5>{%= post.title %}</h5>
                             <p class="my-2">{%= post.content.substring(0,80) %}</p>
