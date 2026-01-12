@@ -9,10 +9,12 @@
                 <p>
                     <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
                 </p>
+                {% if (user) { %}
                 <a class="btn btn-sm btn-primary" href="/blog/post/{%= post.id %}/update">Update</a>
                 <a class="btn btn-sm btn-danger" href="/blog/post/{%= post.id %}/delete"
                     onclick="return confirm('Are you sure?')">Delete</a>
                 Published: {%= post.isPublished %}
+                {% } %}
             </div>
             <article class="blog-post">
                 <a href="/blog/post?filter[blogCategoryId]={%= post.blogCategoryId.id %}">{%= post.blogCategoryId.name
@@ -22,7 +24,7 @@
                         %}</a>
                 </h2>
                 <p class="blog-post-meta">{%= post.createdAt.toUTCString() %}</p>
-                {%= post.content %}
+                {%- post.content %}
                 <img src="{%= post.imageUrl %}" alt="{%= post.title %}"
                     style="width:360px; height:180px; float:left; margin: 0px 15px 15px 0px;">
             </article>

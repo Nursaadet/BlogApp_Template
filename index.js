@@ -40,6 +40,8 @@ app.use(require("./src/middlewares/queryHandler"));
 
 // StaticFiles:
 app.use("/assets", express.static("./public/assets"));
+app.use("/tinymce", express.static("./node_modules/tinymce"));
+
 app.use((req, res, next) => {
   res.locals.user = req.session?.user;
   next();
