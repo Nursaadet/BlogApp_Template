@@ -107,8 +107,21 @@ module.exports = {
   },
 
   delete: async (req, res) => {
-    const data = await BlogPost.deleteOne({ _id: req.params.postId });
+    let url = req.get("Referrer");
 
-    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+    if (url === "/blog/post") {
+      url = "/blog/post";
+    } else if (url?.includes("filter")) {
+      url = req.get("Referrer");
+    }
+
+    const post = await BlogPost.findOne({ _id: req.params.postId }).populate(
+      "blogCategoryId"
+    );
+    await BlogPost.deleteOne({ _id: req.params.postId });
+
+    const newUrl = `/blog/post?filter[blogCategoryId]=${post.blogCategoryId.id}`;
+    //res.redirect("/");
+    res.redirect(url || newUrl || "/blog/post");
   },
 };
